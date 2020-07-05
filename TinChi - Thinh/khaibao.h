@@ -39,7 +39,7 @@ struct NodeLopTC{
 	PTRDK DSDK = NULL; // con tro tro den danh sach sv dang ki lop tin chi 
 	struct NodeLopTC *left, *right;
 };
-typedef struct NodeLopTC PTRLTC;
+typedef struct NodeLopTC *PTRLTC;
 
 // Danh dach mon hoc (Mang con tro)
 const int MAXLIST =300;
@@ -54,5 +54,5 @@ struct dsmh {
   int n;
   NodeMonHoc *nodes [MAXLIST];
 };
-typedef struct dsmh PTRMH; 
+typedef struct dsmh *PTRMH; 
 
