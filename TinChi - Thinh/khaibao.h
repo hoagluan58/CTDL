@@ -39,8 +39,8 @@ struct NodeLopTC{
 	char  hocki[2]; 		// hoc ki
 	char  nhom[2]; 			//nhom
 	char  nsvmax[4];
-    char  nsvmin[4];
-	PTRDK DSDK = NULL; // con tro tro den danh sach sv dang ki lop tin chi 
+        char  nsvmin[4];
+	PTRDK DSSVDK = NULL; // con tro tro den danh sach sv dang ki lop tin chi 
 	struct NodeLopTC *left, *right;
 };
 struct dsltc{
