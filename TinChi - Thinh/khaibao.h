@@ -56,7 +56,7 @@ typedef struct dsltc *PTRLTC;
 const int MAXLIST =300;
 struct NodeMonHoc {
   	char mmh[11];	//ma mon hoc
-    char tmh[36];	// ten mon hoc
+        char tmh[36];	// ten mon hoc
 	char stclt[2];		// so tinh chi li thuyet
 	char stcth[2];		// so tinh chi thuc hanh
 };
