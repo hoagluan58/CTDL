@@ -16,6 +16,8 @@ struct dssv {
 };
 typedef dssv *PTRSV;
 
+
+
 // Danh sach dang ki (Danh sach lien ket don)
 struct NodeDK {
 	char mssv[11]; //ma sinh vien
@@ -27,6 +29,8 @@ struct dsdk {
 };
 typedef dsdk *PTRDK;
 
+
+
 // Danh dach Lop Tin Chi ( Cay nhi phan tim kim)
 struct NodeLopTC{
 	int  malopTc; 		//ma lop
@@ -35,24 +39,30 @@ struct NodeLopTC{
 	char  hocki[2]; 		// hoc ki
 	char  nhom[2]; 			//nhom
 	char  nsvmax[4];
-    char  nsvmin[4];
-	PTRDK DSDK = NULL; // con tro tro den danh sach sv dang ki lop tin chi 
+        char  nsvmin[4];
+	PTRDK DSSVDK = NULL; // con tro tro den danh sach sv dang ki lop tin chi 
 	struct NodeLopTC *left, *right;
 };
-typedef struct NodeLopTC *PTRLTC;
+struct dsltc{
+	NodeLopTC ds = NULL;
+	int sl = 0; //so luong nhan vien = 0
+};
+typedef struct dsltc *PTRLTC;
+
+
+
 
 // Danh dach mon hoc (Mang con tro)
 const int MAXLIST =300;
 struct NodeMonHoc {
   	char mmh[11];	//ma mon hoc
-    char tmh[36];	// ten mon hoc
+        char tmh[36];	// ten mon hoc
 	char stclt[2];		// so tinh chi li thuyet
 	char stcth[2];		// so tinh chi thuc hanh
 };
-
 struct dsmh {
   int n;
-  NodeMonHoc *nodes [MAXLIST];
+  NodeMonHoc *nodes [MAXLIST]; // Mang con tro *node
 };
 typedef struct dsmh *PTRMH; 
 
