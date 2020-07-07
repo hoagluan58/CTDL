@@ -98,7 +98,7 @@ void JsonToTitle (BookTitlePtr &out){
 }
 
 void ShowBookTitle (BookTitlePtr data, int n){
-  for (size_t i = 0; i < n; i++) {
+  for (int i = 0; i < n; i++) {
     std::cout << "ISBN: " << data[i].isbn << '\n';
     std::cout << "Name: " << data[i].name << '\n';
     std::cout << "Author: " << data[i].author << '\n';
