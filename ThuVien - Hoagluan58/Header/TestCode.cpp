@@ -1,14 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include "IO.hpp"
-#include "Utils.hpp"
+#include "Borrow.hpp"
 
 int main(){
 
-        BookTitlePtr list;
-        JsonToTitle(list);
-        ShowBookTitle(list, sizeof(list));
+        Borrow::D2L brr;
+        Borrow::InitD2L(brr);
+        Borrow::abook newbrr = {"12213", {1,4,2013}, {7, 5, 2013}, 0};
+        Borrow::insertNode(brr, newbrr);
 
 
 

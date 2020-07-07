@@ -1,8 +1,5 @@
 #ifndef BOOK_HPP
 #define BOOK_HPP
-#include "json.hpp"
-
-using json = nlohmann::json;
 
 typedef struct {
         std::string id;

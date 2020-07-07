@@ -1,16 +1,16 @@
 Thư viện: Ta tổ chức các danh sách sau:
 
-1. Đầu sách : danh sách tuyến tính là 1 mảng con trỏ (ISBN , Tên sách, Số trang, Tác giả, năm
+1. Đầu sách (done): danh sách tuyến tính là 1 mảng con trỏ (ISBN , Tên sách, Số trang, Tác giả, năm
 xuất bản, thể loại, con trỏ dms): con trỏ sẽ trỏ đến các sách thuộc đầu sách tương ứng
 
-2. Danh mục sách : danh sách liên kết đơn( Mã sách, trạng thái, vị trí ). Mỗi cuốn sách chỉ
+2. Danh mục sách  (done) - need edit: danh sách liên kết đơn( Mã sách, trạng thái, vị trí ). Mỗi cuốn sách chỉ
 có 1 mã duy nhất; trạng thái của sách bao gồm: 0: cho mượn được, 1: đã có độc giả mượn, 2:
 sách đã thanh lý .
 
 3. Danh sách thẻ độc giả: cây nhị phân tìm kiếm (MATHE (số nguyên ngẫu nhiên tự động),
 Ho, Ten, Phai, trạng thái của thẻ, con trỏ): con trỏ sẽ trỏ đến danh sách các cuốn sách đã và
 đang mượn.
-4.  Danh sách MUONTRA : danh sách liên kết kép ( MASACH, NgayMuon, NgayTra, trạng
+4.  Danh sách MUONTRA (done): danh sách liên kết kép ( MASACH, NgayMuon, NgayTra, trạng
 thái): trạng thái =0 là sách đang mượn (chưa trả), =1 là đã trả, =2 : làm mất sách
 Chương trình có các chức năng sau:
 
