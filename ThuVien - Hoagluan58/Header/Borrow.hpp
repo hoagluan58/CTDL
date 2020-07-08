@@ -25,18 +25,18 @@ struct node {
 typedef struct {
         struct node *head;
         struct node *tail;
-} D2L;
+}DoubledLinkedList;
 
-void InitD2L(D2L &list){
+void InitDoubledLinkedList(DoubledLinkedList &list){
         list.head = NULL;
         list.tail = NULL;
 }
 
-int isEmpty(D2L list){
+int isEmpty(DoubledLinkedList list){
         return (list.head == NULL);
 }
 
-int len(D2L list){
+int len(DoubledLinkedList list){
         node *headptr = list.head, *tailptr = list.tail;
         int i=0;
         if (headptr != NULL) i = 1;
@@ -59,7 +59,7 @@ node *Make_node (abook data){
         return newnode;
 }
 
-void insertNode (D2L &list, abook data){
+void insertNode (DoubledLinkedList &list, abook data){
         node *newnode;
         newnode = Make_node(data);
         if (isEmpty(list)) {
@@ -73,7 +73,7 @@ void insertNode (D2L &list, abook data){
         }
 }
 
-void delhead (D2L &list) //Xoa phan tu dau tien
+void delhead (DoubledLinkedList &list) //Xoa phan tu dau tien
 {
         if (!isEmpty(list))
         {
@@ -81,7 +81,7 @@ void delhead (D2L &list) //Xoa phan tu dau tien
         }
 }
 
-void deltail (D2L &list) //Xoa phan tu dau tien
+void deltail (DoubledLinkedList &list) //Xoa phan tu dau tien
 {
         if (!isEmpty(list))
         {
@@ -90,7 +90,7 @@ void deltail (D2L &list) //Xoa phan tu dau tien
         }
 }
 
-void delk (D2L &list, int k){
+void delk (DoubledLinkedList &list, int k){
         node *headptr = list.head, *tailptr;
         int i=1, l = len(list);
         if (k == 1) delhead(list);
@@ -108,7 +108,7 @@ void delk (D2L &list, int k){
         }
 }
 
-int search (D2L list, abook data){
+int search (DoubledLinkedList list, abook data){
         node *ptr = list.head;
         int i=1;
         while (ptr != NULL && ptr->data.id != data.id) {
@@ -119,7 +119,7 @@ int search (D2L list, abook data){
         else return 0;
 }
 
-void delx (D2L &list, abook data){
+void delx (DoubledLinkedList &list, abook data){
         int l = search(list, data);
         while (l) {
                 delk(list, l);
