@@ -1,4 +1,12 @@
+#pragma once
 #include <iostream>
+#include <string>
+#include <cstdlib>// rand , srand
+#include <ctime>
+#include <conio.h>
+#include <time.h>
+#include <fstream>
+#define MAXLOP 300
 // danh sach mon hoc mang con tro 
 struct mon_hoc
 {
@@ -10,10 +18,10 @@ struct mon_hoc
 typedef struct mon_hoc Mon_Hoc;
 struct ds_mon_hoc
 {
-	Mon_Hoc *ds[300];
-	int sl = 0;
+	Mon_Hoc *ds[MAXLOP];
+	int sl ;
 };
-typedef struct ds_mon_hoc DS_Mon_Hoc;
+typedef struct ds_mon_hoc *DS_Mon_Hoc;
 
 
 //danh sach lop tin chi cay nhi phan tim kiem
@@ -25,7 +33,7 @@ struct tin_chi{
 	int nhom;
 	int svmax;
 	int svmin;
-	DSSV Danh_Sach_Sinh_Vien; //con tro tro toi
+	DSDK Danh_Sach_Sinh_Vien_Dang_Ki; //con tro tro toi
 };
 
 struct danh_sach_tin_chi{
@@ -33,7 +41,7 @@ struct danh_sach_tin_chi{
 	danh_sach_tin_chi *left;
 	danh_sach_tin_chi *right;
 };
-typedef danh_sach_tin_chi *DSTC;
+typedef danh_sach_tin_chi* DSTC;
 
 // danh sach sinh vien lien ket don
 struct sinh_vien {
@@ -48,7 +56,7 @@ struct danh_sach_sinh_vien {
 	sinh_vien data;
 	danh_sach_sinh_vien *next;
 };
-typedef dssv *DSSV;
+typedef danh_sach_sinh_vien *DSSV;
 // danh sach dang ki lop
 struct dang_ki {
 	char mssv[12]; //ma sinh vien
@@ -59,7 +67,6 @@ struct danh_sach_dang_ki {
 	danh_sach_dang_ki *next;
 };
 typedef danh_sach_dang_ki *DSDK;
-
 
 
 
