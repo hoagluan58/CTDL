@@ -6,10 +6,30 @@
 #include <windows.h>
 #include <conio.h>
 #include "json.hpp"
-#include "book.hpp"
+#include "Book.hpp"
+#include "Visitor.hpp"
 #include "Utils.hpp"
 
 using json = nlohmann::json;
+
+std::ostream& operator<<(std::ostream& os, const Borrow::abook& data)
+{
+    os << "ID: " << data.id << "\n";
+    os << "Ngay muon: "
+       << data.datebor.day << "/" << data.datebor.month << "/" << data.datebor.year << "\n";
+    if (data.status == 1){
+      os << "Return: "
+         << data.dateret.day << "/" << data.dateret.month << "/" << data.dateret.year << "\n";
+    }
+    else if (data.status == 2){
+      os << "Mat sach" << "\n";
+    }
+    else {
+      os << "Chua den han tra sach\n";
+    }
+
+    return os;
+}
 
 void ShowConsoleCursor(bool showFlag) {
         HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -85,11 +105,12 @@ void Menu_Box (int rows, int columns,int speed=0, int showinfo=1){
                 gotoxy(getEdge(columns, 21), 4);
                 std::cout << "GV: Luu Nguyen Ky Thu";
                 gotoxy(getEdge(columns, 28), 7);
-                std::cout << "CHUONG TRINH THI TRAC NGHIEM";
-                gotoxy(0, 8);
+                std::cout << "CHUONG TRINH QUAN LI THU VIEN";
+                gotoxy(0, 4);
                 std::cout << "||" << std::setfill('_') << std::setw(columns-3) << "||";
         }
 }
+
 
 void Menu_Admin (){
         int pointer=0, prepointer=0, rows, columns;;
@@ -171,7 +192,6 @@ void Menu_Admin (){
         }
 }
 
-
 void BookToJson (std::string filename, ListOfBookPtr list){
         json data;
         while(list->next != NULL) {
@@ -187,90 +207,92 @@ void BookToJson (std::string filename, ListOfBookPtr list){
 }
 
 void JsonToBook (std::string filename, ListOfBookPtr &list){
-      json data;
-      std::ifstream input(filename + ".json");
-      input >> data;
+        json data;
+        std::ifstream input(filename + ".json");
+        input >> data;
 
-      for (size_t i = 0; i < data.size(); i++) {
-          Book temp;
-          data[i].at("id").get_to(temp.id);
-          data[i].at("position").get_to(temp.position);
-          data[i].at("status").get_to(temp.status);
-          InsertBookToList(&list, temp);
-      }
+        for (size_t i = 0; i < data.size(); i++) {
+                Book temp;
+                data[i].at("id").get_to(temp.id);
+                data[i].at("position").get_to(temp.position);
+                data[i].at("status").get_to(temp.status);
+                InsertBookToList(&list, temp);
+        }
 }
 
 void ShowBookList (ListOfBookPtr book){
-  while (book->next != NULL) {
-    std::cout << "ID: " << book->data.id << ", ";
-    std::cout << "Status: " << book->data.status << ", ";
-    std::cout << "Position: " << book->data.position << ".\n";
-    book = book->next;
-  }
+        while (book->next != NULL) {
+                std::cout << "ID: " << book->data.id << ", ";
+                std::cout << "Status: " << book->data.status << ", ";
+                std::cout << "Position: " << book->data.position << ".\n";
+                book = book->next;
+        }
 }
 
 void TitleToJson (BookTitlePtr list){
-  json data;
-  for (size_t i = 0; i < sizeof(list); i++) {
-    data += {
-      {"isbn", list[i].isbn},
-      {"name", list[i].name},
-      {"author", list[i].author},
-      {"pages", list[i].pages},
-      {"years", list[i].pages},
-      {"genre", list[i].genre}
-    };
-  }
-  std::ofstream output("BookTitle.json");
-  if (output.is_open()) {
-    output << std::setw(4) << data << std::endl;
-    output.close();
-  }
+        json data;
+        for (size_t i = 0; i < sizeof(list); i++) {
+                data += {
+                        {"isbn", list[i].isbn},
+                        {"name", list[i].name},
+                        {"author", list[i].author},
+                        {"pages", list[i].pages},
+                        {"years", list[i].pages},
+                        {"genre", list[i].genre}
+                };
+        }
+        std::ofstream output("BookTitle.json");
+        if (output.is_open()) {
+                output << std::setw(4) << data << std::endl;
+                output.close();
+        }
 }
 
 void JsonToTitle (BookTitlePtr &out){
-  json data;
-  std::ifstream infile("BookTitle.json", std::ios::in);
-  if (infile.is_open()) {
-    infile >> data;
-    infile.close();
-    out = new BookTitle[data.size()];
-    for (size_t i=0; i < data.size(); i++){
-      data[i].at("isbn").get_to(out[i].isbn);
-      data[i].at("name").get_to(out[i].name);
-      data[i].at("author").get_to(out[i].author);
-      data[i].at("pages").get_to(out[i].pages);
-      data[i].at("years").get_to(out[i].years);
-      data[i].at("genre").get_to(out[i].genre);
-      std::ifstream bookdata(out[i].name + ".json", std::ios::in);
-      if (bookdata.is_open()) {
-        json book;
-        bookdata >> book;
-        JsonToBook(out[i].name, out[i].BookList);
-        bookdata.close();
-      }
-      else {
-        std::cerr << "Unable to open file\n";
-      }
-    }
-  }
-  else {
-    std::cerr << "Unable to open file\n";
-  }
+        json data;
+        std::ifstream infile("BookTitle.json", std::ios::in);
+        if (infile.is_open()) {
+                infile >> data;
+                infile.close();
+                out = new BookTitle[data.size()];
+                for (size_t i=0; i < data.size(); i++) {
+                        data[i].at("isbn").get_to(out[i].isbn);
+                        data[i].at("name").get_to(out[i].name);
+                        data[i].at("author").get_to(out[i].author);
+                        data[i].at("pages").get_to(out[i].pages);
+                        data[i].at("years").get_to(out[i].years);
+                        data[i].at("genre").get_to(out[i].genre);
+                        std::ifstream bookdata(out[i].name + ".json", std::ios::in);
+                        if (bookdata.is_open()) {
+                                json book;
+                                bookdata >> book;
+                                JsonToBook(out[i].name, out[i].BookList);
+                                bookdata.close();
+                        }
+                        else {
+                                std::cerr << "Unable to open file\n";
+                        }
+                }
+        }
+        else {
+                std::cerr << "Unable to open file\n";
+        }
 }
 
 void ShowBookTitle (BookTitlePtr data, int n){
-  for (int i = 0; i < n; i++) {
-    std::cout << "ISBN: " << data[i].isbn << '\n';
-    std::cout << "Name: " << data[i].name << '\n';
-    std::cout << "Author: " << data[i].author << '\n';
-    std::cout << "Pages: " << data[i].pages << '\n';
-    std::cout << "Years: " << data[i].years << '\n';
-    std::cout << "Genre: " << data[i].genre << '\n';
-    std::cout << "_________________________________________" << '\n';
-    ShowBookList(data[i].BookList);
-    std::cout << "_________________________________________" << '\n';
-  }
+        for (int i = 0; i < n; i++) {
+                std::cout << "ISBN: " << data[i].isbn << '\n';
+                std::cout << "Name: " << data[i].name << '\n';
+                std::cout << "Author: " << data[i].author << '\n';
+                std::cout << "Pages: " << data[i].pages << '\n';
+                std::cout << "Years: " << data[i].years << '\n';
+                std::cout << "Genre: " << data[i].genre << '\n';
+                std::cout << "_________________________________________" << '\n';
+                ShowBookList(data[i].BookList);
+                std::cout << "_________________________________________" << '\n';
+        }
 }
+
+
 
 #endif
