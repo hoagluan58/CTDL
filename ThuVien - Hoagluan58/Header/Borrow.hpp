@@ -1,6 +1,7 @@
 #ifndef BORROW_HPP
 #define BORROW_HPP
 
+
 namespace Borrow {
 
 typedef struct {
@@ -15,6 +16,7 @@ typedef struct {
         date dateret;
         int status;
 }abook;
+
 
 struct node {
         abook data;
@@ -51,8 +53,8 @@ int len(DoubledLinkedList list){
         return i;
 }
 
-node *Make_node (abook data){
-        node *newnode = (node *) malloc (sizeof(node));
+struct node *Make_node (abook data){
+        struct node *newnode = (struct node*) malloc(sizeof(struct node)) ;
         newnode->data = data;
         newnode->next = NULL;
         newnode->prev = NULL;
