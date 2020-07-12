@@ -1,34 +1,267 @@
 [
-    {
-        "author": "OKAS",
-        "genre": "JAHSD",
-        "isbn": "JAC@",
-        "name": "KJAHC",
-        "pages": 213,
-        "years": 1293213
-    },
-    {
-        "author": "Pozo",
-        "genre": "Fantasy",
-        "isbn": "1BCD23",
-        "name": "Hobbit",
-        "pages": 371,
-        "years": 1992
-    },
-    {
-        "author": "asfasf",
-        "genre": "asfasf",
-        "isbn": "safasf",
-        "name": "safqw",
-        "pages": 1241,
-        "years": 1992
-    },
-    {
-        "author": "asfasfas",
-        "genre": "asfasfsa",
-        "isbn": "asfascas",
-        "name": "12dsf",
-        "pages": 4220,
-        "years": 428
-    }
+  {
+    "author": "Edna Wu",
+    "genre": "Crime",
+    "isbn": "978-1-2543-1934-6",
+    "name": "Cursed Sign",
+    "pages": 200,
+    "years": 2010
+  },
+  {
+    "author": "Jolene Carter",
+    "genre": "Crime",
+    "isbn": "978-5-8890-0197-3",
+    "name": "Son of Glass",
+    "pages": 100,
+    "years": 1992
+  },
+  {
+    "author": "Rhiana Fisher",
+    "genre": "Crime",
+    "isbn": "978-1-2412-8644-6",
+    "name": "The Ghost in the Night",
+    "pages": 200,
+    "years": 2002
+  },
+  {
+    "author": "Charleigh Alvarez",
+    "genre": "Crime",
+    "isbn": "978-9-6470-9048-3",
+    "name": "Unleash the Devil",
+    "pages": 150,
+    "years": 1980
+  },
+  {
+    "author": "Nida Anthony",
+    "genre": "Crime",
+    "isbn": "978-9-5261-7454-9",
+    "name": "Made for Ruin",
+    "pages": 150,
+    "years": 2000
+  },
+  {
+    "author": "Kingston Allman",
+    "genre": "Crime",
+    "isbn": "978-2-0677-0378-0",
+    "name": "Wanted for Slaughter",
+    "pages": 155,
+    "years": 2004
+  },
+  {
+    "author": "Ruby-Mae Glass",
+    "genre": "Crime",
+    "isbn": "978-7-1511-2641-4",
+    "name": "The Murder in the City",
+    "pages": 200,
+    "years": 2003
+  },
+  {
+    "author": "Maryam Whitworth",
+    "genre": "Fantasy",
+    "isbn": "978-7-4889-8448-0",
+    "name": "The Colossus in the Storm",
+    "pages": 205,
+    "years": 2007
+  },
+  {
+    "author": "Imani Flowers",
+    "genre": "Fantasy",
+    "isbn": "978-1-2512-2933-4",
+    "name": "The Weeping Heavens",
+    "pages": 210,
+    "years": 2010
+  },
+  {
+    "author": "Kezia Sellers",
+    "genre": "Fantasy",
+    "isbn": "978-7-8395-7703-3",
+    "name": "Rogue's Oath",
+    "pages": 215,
+    "years": 2014
+  },
+  {
+    "author": "Jimmie Campbell",
+    "genre": "Fantasy",
+    "isbn": "978-0-3468-5036-1",
+    "name": "The Salt of the Nameless",
+    "pages": 220,
+    "years": 2016
+  },
+  {
+    "author": "Aronas Franco",
+    "genre": "Fantasy",
+    "isbn": "978-1-2141-4362-2",
+    "name": "Scars of Circe",
+    "pages": 230,
+    "years": 2019
+  },
+  {
+    "author": "Maariya Neal",
+    "genre": "Fantasy",
+    "isbn": "978-5-5695-0409-1",
+    "name": "Daughter of Light",
+    "pages": 240,
+    "years": 2020
+  },
+  {
+    "author": "Sahib Higgs",
+    "genre": "Mystery",
+    "isbn": "978-8-4444-8970-4",
+    "name": "Secret of the Pock-Marked Baker",
+    "pages": 100,
+    "years": 2020
+  },
+  {
+    "author": "Brad Rutledge",
+    "genre": "Mystery",
+    "isbn": "978-3-4492-2393-3",
+    "name": "Sign of the Concave Pendant",
+    "pages": 105,
+    "years": 2017
+  },
+  {
+    "author": "Kaylee Terry",
+    "genre": "Mystery",
+    "isbn": "978-6-1125-5719-9",
+    "name": "The Gold Mirror",
+    "pages": 110,
+    "years": 2013
+  },
+  {
+    "author": "Stella Riggs",
+    "genre": "Mystery",
+    "isbn": "978-3-2182-4844-0",
+    "name": "The Solitary Trolley",
+    "pages": 120,
+    "years": 2013
+  },
+  {
+    "author": "Marek Gillespie",
+    "genre": "Mystery",
+    "isbn": "978-1-2079-4032-0",
+    "name": "Death of the Prize Corgi",
+    "pages": 80,
+    "years": 2013
+  },
+  {
+    "author": "Nafeesa Mcdaniel",
+    "genre": "Mystery",
+    "isbn": "978-9-0057-3429-5",
+    "name": "Clue of the Split Claw",
+    "pages": 90,
+    "years": 1890
+  },
+  {
+    "author": "Aadil Leblanc",
+    "genre": "Mystery",
+    "isbn": "978-6-1270-3037-3",
+    "name": "Case of the Chinese Boa",
+    "pages": 50,
+    "years": 1862
+  },
+  {
+    "author": "Toni Norton",
+    "genre": "Mystery",
+    "isbn": "978-8-2292-8196-7",
+    "name": "Sign of the Hollow Amulet",
+    "pages": 100,
+    "years": 1930
+  },
+  {
+    "author": "Fergus Chadwick",
+    "genre": "Romance",
+    "isbn": "978-8-1352-6698-0",
+    "name": "Bullet in the Heart",
+    "pages": 160,
+    "years": 1930
+  },
+  {
+    "author": "Farzana Cleveland",
+    "genre": "Romance",
+    "isbn": "978-6-3520-0302-9",
+    "name": "Flirty and Thirty",
+    "pages": 169,
+    "years": 1934
+  },
+  {
+    "author": "Abigale Burch",
+    "genre": "Romance",
+    "isbn": "978-0-0436-2088-5",
+    "name": "American Born",
+    "pages": 164,
+    "years": 1952
+  },
+  {
+    "author": "Timothy Weaver",
+    "genre": "Romance",
+    "isbn": "978-6-2842-6157-3",
+    "name": "Dearest, You Said",
+    "pages": 184,
+    "years": 1952
+  },
+  {
+    "author": "Karam Lara",
+    "genre": "Romance",
+    "isbn": "978-3-0816-4281-9",
+    "name": "Birds of a Feather",
+    "pages": 184,
+    "years": 1999
+  },
+  {
+    "author": "Hira Kaye",
+    "genre": "Romance",
+    "isbn": "978-3-1205-6247-4",
+    "name": "Trials of Fire",
+    "pages": 184,
+    "years": 1999
+  },
+  {
+    "author": "Cory Greer",
+    "genre": "Romance",
+    "isbn": "978-4-0593-0015-1",
+    "name": "The Accidental Wedding",
+    "pages": 185,
+    "years": 1985
+  },
+  {
+    "author": "Ailsa Montgomery",
+    "genre": "Romance",
+    "isbn": "978-8-6351-7328-3",
+    "name": "Two's Company",
+    "pages": 186,
+    "years": 1985
+  },
+  {
+    "author": "Lenny Torres",
+    "genre": "Sci-fi",
+    "isbn": "978-6-7961-9412-3",
+    "name": "The Code of Hope",
+    "pages": 400,
+    "years": 1973
+  },
+  {
+    "author": "Mandeep Kelley",
+    "genre": "Sci-fi",
+    "isbn": "978-0-9725-8691-7",
+    "name": "Pluto Ascending",
+    "pages": 500,
+    "years": 1973
+  },
+  {
+    "author": "Madison Eaton",
+    "genre": "Sci-fi",
+    "isbn": "978-8-3832-4023-7",
+    "name": "2077: Cyberpunk",
+    "pages": 600,
+    "years": 1974
+  },
+  {
+    "author": "Lauryn Hulme",
+    "genre": "Sci-fi",
+    "isbn": "978-3-0558-5213-8",
+    "name": "Saturn Falling",
+    "pages": 700,
+    "years": 1974
+  }
+
 ]
