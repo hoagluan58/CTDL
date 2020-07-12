@@ -12,23 +12,22 @@
 
 using json = nlohmann::json;
 
-std::ostream& operator<<(std::ostream& os, const Borrow::abook& data)
-{
-    os << "ID: " << data.id << "\n";
-    os << "Ngay muon: "
-       << data.datebor.day << "/" << data.datebor.month << "/" << data.datebor.year << "\n";
-    if (data.status == 1){
-      os << "Return: "
-         << data.dateret.day << "/" << data.dateret.month << "/" << data.dateret.year << "\n";
-    }
-    else if (data.status == 2){
-      os << "Mat sach" << "\n";
-    }
-    else {
-      os << "Chua den han tra sach\n";
-    }
+std::ostream& operator<<(std::ostream& os, const Borrow::abook& data){
+        os << "ID: " << data.id << "\n";
+        os << "Ngay muon: "
+           << data.datebor.day << "/" << data.datebor.month << "/" << data.datebor.year << "\n";
+        if (data.status == 1) {
+                os << "Return: "
+                   << data.dateret.day << "/" << data.dateret.month << "/" << data.dateret.year << "\n";
+        }
+        else if (data.status == 2) {
+                os << "Mat sach" << "\n";
+        }
+        else {
+                os << "Chua den han tra sach\n";
+        }
 
-    return os;
+        return os;
 }
 
 void ShowConsoleCursor(bool showFlag) {
@@ -60,7 +59,7 @@ void getWindowsSize(int &rows, int &columns){
 
 void highLightChoose(std::string info, int y, int columns){
         int x = getEdge(columns, info.length());
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 124);
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 240);
         gotoxy(x, y);
         std::cout << info;
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -111,20 +110,220 @@ void Menu_Box (int rows, int columns,int speed=0, int showinfo=1){
         }
 }
 
+void getInput(int &pointer, int maxpointer, int x, int y, size_t max, std::string &input){
+        int rows, columns, start = input.length() > 49 ? input.length()-49 : 0;
+        getWindowsSize(rows, columns);
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+        ShowConsoleCursor(true);
 
-void Menu_Admin (){
+        std::string clear(50, ' ');
+        unsigned char capture;
+        size_t pos = input.length();
+
+        gotoxy(x, y);
+        std::cout << input.substr(start);
+
+        while (true) {
+                if (kbhit()) {
+                        if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+                                pointer++;
+                                Sleep(125);
+                                return;
+                        }
+                        else if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+                                pointer = -1;
+                                return;
+                        }
+                        else if (GetAsyncKeyState(VK_BACK) & 0x8000) {
+                                std::string cclear(input.length(), ' ');
+                                gotoxy(x, y);
+                                std::cout << cclear;
+                                if (input == "") {
+                                        continue;
+                                }
+                                else {
+                                        input.pop_back();
+                                        gotoxy(x, y);
+                                        std::cout << input.substr(start);
+                                        pos--;
+                                        gotoxy(x+pos, y);
+                                        if (start > 0) {
+                                                start--;
+                                                gotoxy(x+48, y);
+                                        }
+                                        Sleep(125);
+                                        continue;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_UP) & 0x8000) {
+                                if (pointer > 0) {
+                                        pointer--;
+                                        return;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+                                if (pointer < maxpointer) {
+                                        pointer++;
+                                        return;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+                                if (pos > 0) {
+                                        pos--;
+                                        gotoxy(x+pos, y);
+                                        if (start > 0) {
+                                                start--;
+                                                gotoxy(x+49, y);
+                                        }
+
+                                }
+                                Sleep(125);
+                                continue;
+                        }
+                        else if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+                                if (pos < input.length()) {
+                                        pos++;
+                                        gotoxy(x+pos, y);
+                                        if (pos > 49) {
+                                                start++;
+                                                gotoxy(x+49, y);
+                                        }
+                                }
+                                Sleep(125);
+                                continue;
+                        }
+                        else {
+                                capture = getch();
+                                while(kbhit()) getch();
+                                if (input.length() == max) {
+                                        continue;
+                                }
+                                else {
+                                        if (isalnum(capture)) {
+                                                input.insert(pos, 1, capture);
+                                                pos++;
+                                                gotoxy(x,y);
+                                                if (pos > 49) {
+                                                        start++;
+                                                }
+                                                std::cout << input.substr(start);
+                                                gotoxy(x+pos, y);
+                                                if (pos > 49) {
+                                                        gotoxy(x+49, y);
+                                                }
+                                                continue;
+                                        }
+                                }
+                        }
+                }
+        }
+}
+
+void getNumInput(int &pointer, int maxpointer, int x, int y, size_t max, int &data){
+        std::string input = std::to_string(data);
+        int rows, columns;
+        getWindowsSize(rows, columns);
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+        ShowConsoleCursor(true);
+
+        std::string clear(max, ' ');
+        unsigned char capture;
+        size_t pos=input.length();
+
+        gotoxy(x, y);
+        std::cout << input;
+
+        while (true) {
+                if (kbhit()) {
+                        if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+                                pointer++;
+                                Sleep(125);
+                                data = stoi(input);
+                                return;
+                        }
+                        else if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+                                pointer = -1;
+                                data = stoi(input);
+                                return;
+                        }
+                        else if (GetAsyncKeyState(VK_BACK) & 0x8000) {
+                                if (pos-1 < 0) {
+                                        continue;
+                                }
+                                input.erase(pos-1,1);
+                                pos--;
+                                gotoxy(x, y);
+                                std::cout << clear;
+                                gotoxy(x, y);
+                                std::cout << input;
+                                gotoxy(x+pos, y);
+                                Sleep(125);
+                                continue;
+                        }
+                        else if (GetAsyncKeyState(VK_UP) & 0x8000) {
+                                if (pointer > 0) {
+                                        pointer--;
+                                        data = stoi(input);
+                                        return;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+                                if (pointer < maxpointer) {
+                                        pointer++;
+                                        data = stoi(input);
+                                        return;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+                                if (pos > 0) {
+                                        pos--;
+                                        gotoxy(x+pos, y);
+                                }
+                                continue;
+                        }
+                        else if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+                                if (pos < input.length()) {
+                                        pos++;
+                                        gotoxy(x+pos, y);
+                                }
+                                continue;
+                        }
+                        else {
+                                capture = getch();
+                                while(kbhit()) getch();
+                                if (input.length() == max) {
+                                        continue;
+                                }
+                                else {
+
+                                        if (isdigit(capture)) {
+                                                input.insert(pos, 1, capture);
+                                                pos++;
+                                                gotoxy(x,y);
+                                                std::cout << input;
+                                                gotoxy(x+pos, y);
+                                                continue;
+                                        }
+                                }
+                        }
+                }
+        }
+}
+
+void Menu_Visitor (){
+        const int menu_count = 5;
         int pointer=0, prepointer=0, rows, columns;;
-        std::string Menu[5] = {"Quan li doc gia   ",
-                               "Quan li dau sach  ",
-                               "Them dau sach     ",
-                               "Muon tra sach     ",
-                               "Thoat             "};
+        std::string Menu[menu_count] = {"Tao the thu vien  ",
+                                        "Thay doi thong tin",
+                                        "Huy the thu vien  ",
+                                        "Muon sach qua han ",
+                                        "Thoat             "};
 
         getWindowsSize(rows, columns);
-        int firstMenuPosition = getEdge(rows, 5);
+        int firstMenuPosition = getEdge(rows, menu_count);
 
         Menu_Box(rows, columns);
-        printMenu(Menu, 5, rows, columns);
+        printMenu(Menu, menu_count, rows, columns);
 
         //Read data here
 
@@ -139,14 +338,14 @@ void Menu_Admin (){
                                 if (pointer == 0) {
                                         //Load data
                                         Menu_Box(rows, columns);
-                                        printMenu(Menu, 5, rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
                                         highLightChoose(Menu[pointer], newChoosePos, columns);
                                         break;
                                 }
                                 else if (pointer == 1) {
                                         //Load data
                                         Menu_Box(rows, columns);
-                                        printMenu(Menu, 5, rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
                                         highLightChoose(Menu[pointer], newChoosePos, columns);
                                         //load data
                                         break;
@@ -155,14 +354,15 @@ void Menu_Admin (){
 
 
                                         Menu_Box(rows, columns);
-                                        printMenu(Menu, 5, rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
                                         highLightChoose(Menu[pointer], newChoosePos, columns);
                                         break;
                                 }
                                 else if (pointer == 3) {
 
+
                                         Menu_Box(rows, columns);
-                                        printMenu(Menu, 5, rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
                                         highLightChoose(Menu[pointer], newChoosePos, columns);
                                         break;
                                 }
@@ -179,6 +379,216 @@ void Menu_Admin (){
                         }
                         else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
                                 if (pointer < 4) {
+                                        prepointer = pointer;
+                                        pointer++;
+                                        break;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+                                return;
+                        }
+                }
+                Sleep(125);
+        }
+}
+
+void Menu_Book (){
+        const int menu_count = 4;
+        int pointer=0, prepointer=0, rows, columns;;
+        std::string Menu[menu_count] = {"Them dau sach     ",
+                                        "Danh muc sach     ",
+                                        "Thoat             "};
+
+        getWindowsSize(rows, columns);
+        int firstMenuPosition = getEdge(rows, menu_count);
+
+        Menu_Box(rows, columns);
+        printMenu(Menu, menu_count, rows, columns);
+
+        //Read data here
+
+        while (true) {
+                int oldChoosePos = firstMenuPosition+prepointer*2;
+                int newChoosePos = firstMenuPosition+pointer*2;
+                deHighLightChoose(Menu[prepointer], oldChoosePos, columns);
+                highLightChoose(Menu[pointer], newChoosePos, columns);
+
+                while (true) {
+                        if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+                                if (pointer == 0) {
+                                        //Load data
+                                        Menu_Visitor();
+                                        Menu_Box(rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
+                                        highLightChoose(Menu[pointer], newChoosePos, columns);
+                                        break;
+                                }
+                                else if (pointer == 1) {
+                                        Menu_Box(rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
+                                        highLightChoose(Menu[pointer], newChoosePos, columns);
+                                        break;
+                                }
+                                else if (pointer == 2) {
+                                        Menu_Box(rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
+                                        highLightChoose(Menu[pointer], newChoosePos, columns);
+                                        break;
+                                }
+                                else if (pointer == 3) {
+                                        return;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_UP) & 0x8000) {
+                                if (pointer > 0) {
+                                        prepointer = pointer;
+                                        pointer--;
+                                        break;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+                                if (pointer < 3) {
+                                        prepointer = pointer;
+                                        pointer++;
+                                        break;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+                                return;
+                        }
+                }
+                Sleep(125);
+        }
+}
+
+void Menu_Borrow (){
+        const int menu_count = 4;
+        int pointer=0, prepointer=0, rows, columns;;
+        std::string Menu[menu_count] = {"Sach dang muon  ",
+                                        "Tra sach        ",
+                                        "Tim sach        ",
+                                        "Thoat           "};
+
+        getWindowsSize(rows, columns);
+        int firstMenuPosition = getEdge(rows, menu_count);
+
+        Menu_Box(rows, columns);
+        printMenu(Menu, menu_count, rows, columns);
+
+        //Read data here
+
+        while (true) {
+                int oldChoosePos = firstMenuPosition+prepointer*2;
+                int newChoosePos = firstMenuPosition+pointer*2;
+                deHighLightChoose(Menu[prepointer], oldChoosePos, columns);
+                highLightChoose(Menu[pointer], newChoosePos, columns);
+
+                while (true) {
+                        if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+                                if (pointer == 0) {
+                                        //Load data
+                                        Menu_Visitor();
+                                        Menu_Box(rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
+                                        highLightChoose(Menu[pointer], newChoosePos, columns);
+                                        break;
+                                }
+                                else if (pointer == 1) {
+                                        Menu_Box(rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
+                                        highLightChoose(Menu[pointer], newChoosePos, columns);
+                                        break;
+                                }
+                                else if (pointer == 2) {
+                                        Menu_Box(rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
+                                        highLightChoose(Menu[pointer], newChoosePos, columns);
+                                        break;
+                                }
+                                else if (pointer == 3) {
+                                        return;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_UP) & 0x8000) {
+                                if (pointer > 0) {
+                                        prepointer = pointer;
+                                        pointer--;
+                                        break;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+                                if (pointer < 3) {
+                                        prepointer = pointer;
+                                        pointer++;
+                                        break;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+                                return;
+                        }
+                }
+                Sleep(125);
+        }
+}
+
+void Menu_Admin (){
+        const int menu_count = 4;
+        int pointer=0, prepointer=0, rows, columns;;
+        std::string Menu[menu_count] = {"Quan li doc gia   ",
+                                        "Quan li dau sach  ",
+                                        "Muon tra sach     ",
+                                        "Thoat             "};
+
+        getWindowsSize(rows, columns);
+        int firstMenuPosition = getEdge(rows, menu_count);
+
+        Menu_Box(rows, columns);
+        printMenu(Menu, menu_count, rows, columns);
+
+        //Read data here
+
+        while (true) {
+                int oldChoosePos = firstMenuPosition+prepointer*2;
+                int newChoosePos = firstMenuPosition+pointer*2;
+                deHighLightChoose(Menu[prepointer], oldChoosePos, columns);
+                highLightChoose(Menu[pointer], newChoosePos, columns);
+
+                while (true) {
+                        if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+                                if (pointer == 0) {
+                                        //Load data
+                                        Menu_Visitor();
+                                        Menu_Box(rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
+                                        highLightChoose(Menu[pointer], newChoosePos, columns);
+                                        break;
+                                }
+                                else if (pointer == 1) {
+                                        Menu_Book();
+                                        Menu_Box(rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
+                                        highLightChoose(Menu[pointer], newChoosePos, columns);
+                                        break;
+                                }
+                                else if (pointer == 2) {
+                                        Menu_Box(rows, columns);
+                                        printMenu(Menu, menu_count, rows, columns);
+                                        highLightChoose(Menu[pointer], newChoosePos, columns);
+                                        break;
+                                }
+                                else if (pointer == 3) {
+                                        return;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_UP) & 0x8000) {
+                                if (pointer > 0) {
+                                        prepointer = pointer;
+                                        pointer--;
+                                        break;
+                                }
+                        }
+                        else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+                                if (pointer < 3) {
                                         prepointer = pointer;
                                         pointer++;
                                         break;
@@ -295,30 +705,30 @@ void ShowBookTitle (BookTitlePtr data, int n){
 
 //Nhập xuất độc giả
 void InsertVisitor(Visitor::card &x) {
-    // Thiếu nhập id tự động
+        // Thiếu nhập id tự động
 
-    std::cout << "\n Nhap ten doc gia: ";
-    std::getline(std::cin, x.fname);
+        std::cout << "\n Nhap ten doc gia: ";
+        std::getline(std::cin, x.fname);
 
-    fflush(stdin);
-    std::cout << "\n Nhap ho doc gia: ";
-    std::getline(std::cin, x.lname);
+        fflush(stdin);
+        std::cout << "\n Nhap ho doc gia: ";
+        std::getline(std::cin, x.lname);
 
-    fflush(stdin);
-    std::cout << "\n Nhap gioi tinh: ";
-    std::getline(std::cin, x.gender);
-    x.status = true; // Thẻ được mượn sách
+        fflush(stdin);
+        std::cout << "\n Nhap gioi tinh: ";
+        std::getline(std::cin, x.gender);
+        x.status = true; // Thẻ được mượn sách
 }
 
 void PrintVisitor(Visitor::card x) {
-    std::cout << "\n Ma the: ";
-    std::cout << "\n Ten doc gia: " << x.fname;
-    std::cout << "\n Ho doc gia: " << x.lname;
-    std::cout << "\n Gioi tinh: " << x.gender;
-    std::cout << "\n Trang thai the: " << x.status;
+        std::cout << "\n Ma the: ";
+        std::cout << "\n Ten doc gia: " << x.fname;
+        std::cout << "\n Ho doc gia: " << x.lname;
+        std::cout << "\n Gioi tinh: " << x.gender;
+        std::cout << "\n Trang thai the: " << x.status;
 }
 // Nhập xuất thông tin sách
-void InsertBookTitle(BookTitle &x) {
+/* void InsertBookTitle(BookTitle &x) {
     std::cout << "\n Nhap ma ISBN: ";
     std::getline(std::cin, x.isbn);
 
@@ -333,18 +743,18 @@ void InsertBookTitle(BookTitle &x) {
 
     std::cout << "\n Nhap nam xuat ban: ";
     std::getline(std::cin, x.years);
-     
+
     std::cout << "\n Nhap loai sach: ";
     std::getline(std::cin, x.genre);
-}
-
+   }
+ */
 void PrintBookTitle(BookTitle x) {
-    std::cout << "\n Ma ISBN: " << x.isbn;
-    std::cout << "\n Ten sach: " << x.name;
-    std::cout << "\n Tac gia: " << x.author;
-    std::cout << "\n So trang: " << x.pages;
-    std::cout << "\n Nam xuat ban: " << x.years;
-    std::cout << "\n Loai sach: " << x.genre;
+        std::cout << "\n Ma ISBN: " << x.isbn;
+        std::cout << "\n Ten sach: " << x.name;
+        std::cout << "\n Tac gia: " << x.author;
+        std::cout << "\n So trang: " << x.pages;
+        std::cout << "\n Nam xuat ban: " << x.years;
+        std::cout << "\n Loai sach: " << x.genre;
 }
 
 #endif
