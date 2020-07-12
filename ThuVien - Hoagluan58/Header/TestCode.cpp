@@ -7,7 +7,6 @@
 
 int main(){
 
-
         Borrow::DoubledLinkedList root;
         Borrow::InitDoubledLinkedList(root);
         Borrow::abook mybook =  {"kkk", {1,3,2020}, {1,4,2020}, 0};

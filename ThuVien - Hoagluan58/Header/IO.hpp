@@ -1,4 +1,4 @@
-#ifndef IO_HPP
+﻿#ifndef IO_HPP
 #define IO_HPP
 #include <iostream>
 #include <fstream>
@@ -293,6 +293,58 @@ void ShowBookTitle (BookTitlePtr data, int n){
         }
 }
 
+//Nhập xuất độc giả
+void InsertVisitor(Visitor::card &x) {
+    // Thiếu nhập id tự động
 
+    std::cout << "\n Nhap ten doc gia: ";
+    std::getline(std::cin, x.fname);
+
+    fflush(stdin);
+    std::cout << "\n Nhap ho doc gia: ";
+    std::getline(std::cin, x.lname);
+
+    fflush(stdin);
+    std::cout << "\n Nhap gioi tinh: ";
+    std::getline(std::cin, x.gender);
+    x.status = true; // Thẻ được mượn sách
+}
+
+void PrintVisitor(Visitor::card x) {
+    std::cout << "\n Ma the: ";
+    std::cout << "\n Ten doc gia: " << x.fname;
+    std::cout << "\n Ho doc gia: " << x.lname;
+    std::cout << "\n Gioi tinh: " << x.gender;
+    std::cout << "\n Trang thai the: " << x.status;
+}
+// Nhập xuất thông tin sách
+void InsertBookTitle(BookTitle &x) {
+    std::cout << "\n Nhap ma ISBN: ";
+    std::getline(std::cin, x.isbn);
+
+    std::cout << "\n Nhap ten sach: ";
+    std::getline(std::cin, x.name);
+
+    std::cout << "\n Nhap ten tac gia: ";
+    std::getline(std::cin, x.author);
+
+    std::cout << "\n Nhap so trang: ";
+    std::getline(std::cin, x.pages);
+
+    std::cout << "\n Nhap nam xuat ban: ";
+    std::getline(std::cin, x.years);
+     
+    std::cout << "\n Nhap loai sach: ";
+    std::getline(std::cin, x.genre);
+}
+
+void PrintBookTitle(BookTitle x) {
+    std::cout << "\n Ma ISBN: " << x.isbn;
+    std::cout << "\n Ten sach: " << x.name;
+    std::cout << "\n Tac gia: " << x.author;
+    std::cout << "\n So trang: " << x.pages;
+    std::cout << "\n Nam xuat ban: " << x.years;
+    std::cout << "\n Loai sach: " << x.genre;
+}
 
 #endif
