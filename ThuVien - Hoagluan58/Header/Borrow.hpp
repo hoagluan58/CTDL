@@ -1,7 +1,6 @@
 #ifndef BORROW_HPP
 #define BORROW_HPP
 
-
 namespace Borrow {
 
 typedef struct {

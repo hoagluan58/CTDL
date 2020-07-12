@@ -12,8 +12,7 @@
 
 using json = nlohmann::json;
 
-std::ostream& operator<<(std::ostream& os, const Borrow::abook& data)
-{
+std::ostream& operator<<(std::ostream& os, const Borrow::abook& data){
     os << "ID: " << data.id << "\n";
     os << "Ngay muon: "
        << data.datebor.day << "/" << data.datebor.month << "/" << data.datebor.year << "\n";
@@ -333,7 +332,7 @@ void InsertBookTitle(BookTitle &x) {
 
     std::cout << "\n Nhap nam xuat ban: ";
     std::getline(std::cin, x.years);
-     
+
     std::cout << "\n Nhap loai sach: ";
     std::getline(std::cin, x.genre);
 }
