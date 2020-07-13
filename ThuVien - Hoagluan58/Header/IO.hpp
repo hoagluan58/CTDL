@@ -484,7 +484,6 @@ int Menu_Add_Card (){
         }
 }
 
-
 void Menu_Visitor (){
         const int menu_count = 5;
         int pointer=0, prepointer=0, rows, columns;;
@@ -796,10 +795,13 @@ void BookToJson (std::string filename, ListOfBookPtr list){
                         {"status", list->data.status},
                         {"position", list->data.position}
                 };
+
                 list = list->next;
         }
-        std::ofstream output("Data/Book/" + filename + ".json");
-        output << std::setw(4) << data << std::endl;
+        if (data != NULL) {
+                std::ofstream output("Data/Book/" + filename + ".json");
+                output << std::setw(4) << data << std::endl;
+        }
 }
 
 void JsonToBook (std::string filename, ListOfBookPtr &list){
@@ -837,13 +839,13 @@ void TitleToJson (BookTitlePtr list){
 
 void JsonToTitle (BookTitlePtr &out, int &count){
         json data;
-        std::ifstream infile("BookTitle.json", std::ios::in);
+        std::ifstream infile("Data/BookTitle.json", std::ios::in);
         if (infile.is_open()) {
                 infile >> data;
                 infile.close();
                 out = new BookTitle[data.size()];
                 count = data.size();
-                for (size_t i=0; i < count; i++) {
+                for (int i=0; i < count; i++) {
                         data[i].at("isbn").get_to(out[i].isbn);
                         data[i].at("name").get_to(out[i].name);
                         data[i].at("author").get_to(out[i].author);
