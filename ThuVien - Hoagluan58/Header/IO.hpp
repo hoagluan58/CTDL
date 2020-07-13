@@ -310,13 +310,188 @@ void getNumInput(int &pointer, int maxpointer, int x, int y, size_t max, int &da
         }
 }
 
+int Menu_Add_Card (){
+        const int menu_count = 5;
+        int ID_Check=0, Name_check=0, Gender_check=0, Pass_check=0;
+        int pointer=1, prepointer=1, rows, columns, first;
+        getWindowsSize(rows, columns);
+
+        Visitor::card newCard;
+        std::string Menu[menu_count] = {"Ma the       :                                                    |",
+                                        "Ho va ten    :                                                    |",
+                                        "Gioi tinh    :                                                    |",
+                                        "                          Xac nhan                                 ",
+                                        "                          Quay lai                                 "};
+        std::string name_temp;
+
+        getWindowsSize(rows, columns);
+
+        //tinh khoang trong 2 ben
+        int edge = getEdge(columns, 67);
+
+        //tinh vi tri in dau tien
+        first = getEdge(rows, menu_count);
+        Menu_Box(rows, columns, 0);
+        printMenu(Menu, menu_count, rows, columns);
+        gotoxy(edge+67, first+2);
+        std::cout << "XX";
+        gotoxy(edge+67, first+4);
+        std::cout << "XX";
+
+
+        while (true) {
+
+                int oldChoosePos = first+prepointer*2;
+                int newChoosePos = first+pointer*2;
+                deHighLightChoose(Menu[prepointer], oldChoosePos, columns);
+                highLightChoose(Menu[pointer], newChoosePos, columns);
+                gotoxy(edge+15, first);
+                gotoxy(edge+15, first+2);
+                std::cout << name_temp;
+                gotoxy(edge+15, first+4);
+                gotoxy(edge+15, first+6);
+
+                while (true) {
+                        if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+                                return 0;
+                        }
+
+                        if (pointer == -1) {
+                                return 0;
+                        }
+                        else if (pointer == 1) {
+                                prepointer = 1;
+                                getInput(pointer, 5, edge+15, first+2, 50, name_temp);
+
+                                if (1) {
+                                        Name_check = 1;
+                                        gotoxy(edge+67, first+2);
+                                        std::cout << "OK";
+                                }
+                                else {
+                                        gotoxy(edge+67, first+2);
+                                        Name_check = 0;
+                                        std::cout << "XX";
+                                }
+                                break;
+                        }
+                        else if (pointer == 2) {
+                                prepointer = 2;
+                                if (1) {
+                                        Gender_check = 1;
+                                        gotoxy(edge+67, first+4);
+                                        std::cout << "OK";
+                                }
+                                else {
+                                        gotoxy(edge+67, first+4);
+                                        Gender_check = 0;
+                                        std::cout << "XX";
+                                }
+                                break;
+                        }
+                        else if (pointer == 3) {
+                                prepointer = 3;
+                                if (1) {
+                                        Pass_check = 1;
+                                        gotoxy(edge+67, first+6);
+                                        std::cout << "OK";
+                                }
+                                else {
+                                        gotoxy(edge+67, first+6);
+                                        Pass_check = 0;
+                                        std::cout << "XX";
+                                }
+                                break;
+
+                        }
+                        else if (pointer == 4) {
+                                prepointer = 4;
+                                if (GetAsyncKeyState(VK_UP) & 0x8000) {
+                                        pointer--;
+                                        break;
+                                }
+                                else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+                                        pointer++;
+                                        break;
+                                }
+                                else if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+                                        if (ID_Check && Name_check && Gender_check && Pass_check) {
+                                                int return_pointer = 0;
+                                                Menu_Box(rows, columns, 0, 0);
+                                                gotoxy(columns/2-12, rows/2);
+                                                std::cout << "Tiep tuc them sinh vien?";
+                                                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+                                                gotoxy(columns/2-4, rows/2+1);
+                                                std::cout << "Tiep tuc";
+                                                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+                                                gotoxy(columns/2-4, rows/2+2);
+                                                std::cout << "Thoat";
+                                                Sleep(125);
+                                                while (true) {
+                                                        if (return_pointer == 0) {
+                                                                if(GetAsyncKeyState(VK_DOWN) & 0x8000) {
+                                                                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+                                                                        gotoxy(columns/2-4, rows/2+1);
+                                                                        std::cout << "Tiep tuc";
+                                                                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+                                                                        gotoxy(columns/2-4, rows/2+2);
+                                                                        std::cout << "Thoat";
+                                                                        return_pointer++;
+                                                                        Sleep(125);
+                                                                        continue;
+                                                                }
+                                                                else if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+                                                                        Sleep(125);
+                                                                        return 1;
+                                                                }
+                                                        }
+                                                        else {
+                                                                if (GetAsyncKeyState(VK_UP) & 0x8000) {
+                                                                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+                                                                        gotoxy(columns/2-4, rows/2+1);
+                                                                        std::cout << "Tiep tuc";
+                                                                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+                                                                        gotoxy(columns/2-4, rows/2+2);
+                                                                        std::cout << "Thoat";
+                                                                        return_pointer--;
+                                                                        Sleep(125);
+                                                                        continue;
+                                                                }
+                                                                else if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+                                                                        Sleep(125);
+                                                                        return 0;
+                                                                }
+                                                        }
+                                                }
+                                        }
+                                        break;
+                                }
+                        }
+                        else if (pointer == 5) {
+                                prepointer = 5;
+                                if (GetAsyncKeyState(VK_UP) & 0x8000) {
+                                        pointer--;
+                                        break;
+                                }
+                                else if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+                                        Sleep(125);
+                                        return 0;
+                                }
+                        }
+
+                }
+                Sleep(125);
+        }
+}
+
+
 void Menu_Visitor (){
         const int menu_count = 5;
         int pointer=0, prepointer=0, rows, columns;;
         std::string Menu[menu_count] = {"Tao the thu vien  ",
                                         "Thay doi thong tin",
                                         "Huy the thu vien  ",
-                                        "Muon sach qua han ",
+                                        "Sach muon qua han ",
                                         "Thoat             "};
 
         getWindowsSize(rows, columns);
@@ -336,6 +511,7 @@ void Menu_Visitor (){
                 while (true) {
                         if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
                                 if (pointer == 0) {
+                                        Menu_Add_Card();
                                         //Load data
                                         Menu_Box(rows, columns);
                                         printMenu(Menu, menu_count, rows, columns);
@@ -571,6 +747,7 @@ void Menu_Admin (){
                                         break;
                                 }
                                 else if (pointer == 2) {
+                                        Menu_Borrow();
                                         Menu_Box(rows, columns);
                                         printMenu(Menu, menu_count, rows, columns);
                                         highLightChoose(Menu[pointer], newChoosePos, columns);
@@ -602,6 +779,15 @@ void Menu_Admin (){
         }
 }
 
+void ShowBookList (ListOfBookPtr book){
+        while (book->next != NULL) {
+                std::cout << "ID: " << book->data.id << ", ";
+                std::cout << "Status: " << book->data.status << ", ";
+                std::cout << "Position: " << book->data.position << ".\n";
+                book = book->next;
+        }
+}
+
 void BookToJson (std::string filename, ListOfBookPtr list){
         json data;
         while(list->next != NULL) {
@@ -612,7 +798,7 @@ void BookToJson (std::string filename, ListOfBookPtr list){
                 };
                 list = list->next;
         }
-        std::ofstream output(filename + ".json");
+        std::ofstream output("Data/Book/" + filename + ".json");
         output << std::setw(4) << data << std::endl;
 }
 
@@ -627,15 +813,6 @@ void JsonToBook (std::string filename, ListOfBookPtr &list){
                 data[i].at("position").get_to(temp.position);
                 data[i].at("status").get_to(temp.status);
                 InsertBookToList(&list, temp);
-        }
-}
-
-void ShowBookList (ListOfBookPtr book){
-        while (book->next != NULL) {
-                std::cout << "ID: " << book->data.id << ", ";
-                std::cout << "Status: " << book->data.status << ", ";
-                std::cout << "Position: " << book->data.position << ".\n";
-                book = book->next;
         }
 }
 
@@ -658,14 +835,15 @@ void TitleToJson (BookTitlePtr list){
         }
 }
 
-void JsonToTitle (BookTitlePtr &out){
+void JsonToTitle (BookTitlePtr &out, int &count){
         json data;
         std::ifstream infile("BookTitle.json", std::ios::in);
         if (infile.is_open()) {
                 infile >> data;
                 infile.close();
                 out = new BookTitle[data.size()];
-                for (size_t i=0; i < data.size(); i++) {
+                count = data.size();
+                for (size_t i=0; i < count; i++) {
                         data[i].at("isbn").get_to(out[i].isbn);
                         data[i].at("name").get_to(out[i].name);
                         data[i].at("author").get_to(out[i].author);
