@@ -1,9 +1,162 @@
 [
   {
-    "fname": "11B34",
-    "lname": "2F6C",
-    "gender": 2
-    "status": 1
+    "id": "1",
+    "fname": "Celeste",
+    "lname": "Macdonald",
+    "gender": "Male",
+    "status": 1,
+    "curBrring": "Cursed Sign"
   },
- 
+  {
+    "id": "2",
+    "fname": "Simon",
+    "lname": "Barclay",
+    "gender": "Male",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "3",
+    "fname": "Waseem",
+    "lname": "Trevino",
+    "gender": "Male",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "4",
+    "fname": "Grace ",
+    "lname": "Mcguire",
+    "gender": "Female",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "5",
+    "fname": "Holli",
+    "lname": "Woodcock",
+    "gender": "Female",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "6",
+    "fname": "Lottie",
+    "lname": "Donovan",
+    "gender": "Female",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "7",
+    "fname": "Reo",
+    "lname": "Ray",
+    "gender": "Male",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "8",
+    "fname": "Denny",
+    "lname": "Tyson",
+    "gender": "Male",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "9",
+    "fname": "Tolga ",
+    "lname": "Clifford",
+    "gender": "Male",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "10",
+    "fname": "Tomi",
+    "lname": "Choi",
+    "gender": "Female",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "11",
+    "fname": "Scarlet ",
+    "lname": "Byrd",
+    "gender": "Female",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "12",
+    "fname": "Jessie",
+    "lname": "Gilmour",
+    "gender": "Female",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "13",
+    "fname": "Marisa",
+    "lname": "Whittaker",
+    "gender": "Female",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "14",
+    "fname": "Talhah",
+    "lname": "Lucas",
+    "gender": "Male",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "15",
+    "fname": "Emilia",
+    "lname": "Lu",
+    "gender": "Female",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "16",
+    "fname": "Omer",
+    "lname": "Murphy",
+    "gender": "Male",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "17",
+    "fname": "Garin",
+    "lname": "Dupont",
+    "gender": "Male",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "18",
+    "fname": "Eiliyah",
+    "lname": "Senior",
+    "gender": "Female",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "19",
+    "fname": "Elara",
+    "lname": "Cherry",
+    "gender": "Female",
+    "status": 1,
+    "curBrring": ""
+  },
+  {
+    "id": "20",
+    "fname": "Heath",
+    "lname": "Kumar",
+    "gender": "Male",
+    "status": 1,
+    "curBrring": ""
+  }
 ]
