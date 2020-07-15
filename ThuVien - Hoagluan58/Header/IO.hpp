@@ -314,6 +314,7 @@ int Menu_Add_Card (){
         const int menu_count = 5;
         int ID_Check=0, Name_check=0, Gender_check=0, Pass_check=0;
         int pointer=1, prepointer=1, rows, columns, first;
+
         getWindowsSize(rows, columns);
 
         Visitor::card newCard;
@@ -706,7 +707,7 @@ void Menu_Borrow (){
         }
 }
 
-void Menu_Admin (){
+void Menu (){
         const int menu_count = 4;
         int pointer=0, prepointer=0, rows, columns;;
         std::string Menu[menu_count] = {"Quan li doc gia   ",
@@ -867,6 +868,28 @@ void JsonToTitle (BookTitlePtr &out, int &count){
         else {
                 std::cerr << "Unable to open file\n";
         }
+}
+
+void vjson (Visitor::nodeavl root, json &data){
+        if (root!= NULL) {
+                vjson(root->left, data);
+                Visitor::card card = root->data;
+                data += {
+                        {"id", root->id},
+                        {"fname", card.fname},
+                        {"lname", card.lname},
+                        {"gender", card.gender},
+                };
+                vjson(root->right, data);
+        }
+}
+
+void VisitorToJson (Visitor::nodeavl root){
+        json data;
+        vjson(root, data);
+        std::ofstream out("Data/Visitor.json");
+        out << std::setw(4) << data;
+        out.close();
 }
 
 void ShowBookTitle (BookTitlePtr data, int n){

@@ -9,7 +9,7 @@ typedef struct {
         std::string lname;
         std::string gender;
         int status;
-        Borrow::DoubledLinkedList curBrring;
+        Borrow::DoubledLinkedList history;
 } card;
 
 struct avlnode {
@@ -23,10 +23,10 @@ struct avlnode {
 typedef struct avlnode *nodeavl;
 
 int max (int a, int b) {
-    if (a > b)
-        return a;
-    else
-        return b;
+        if (a > b)
+                return a;
+        else
+                return b;
 }
 
 int height (nodeavl n){
@@ -35,8 +35,9 @@ int height (nodeavl n){
 }
 
 nodeavl newnode (int id, card data){
-        nodeavl node = new struct avlnode();
+        nodeavl node = (nodeavl) malloc(sizeof(avlnode));
         node->id = id;
+        node->data = data;
         node->left = NULL;
         node->right = NULL;
         node->height = 1;
@@ -70,47 +71,62 @@ nodeavl leftrotate (nodeavl root){
 }
 
 int getbalance (nodeavl root){
-  if (root == NULL){
-    return 0;
-  }
-  return height(root->left) - height(root->right);
+        if (root == NULL) {
+                return 0;
+        }
+        return height(root->left) - height(root->right);
 }
 
 nodeavl insert (nodeavl node, int id, card data){
-  if (node == NULL){
-    return (newnode(id, data));
-  }
-  if (id < node->id){
-    node->left = insert(node->left, id, data);
-  }
-  else if (id > node->id){
-    node->right = insert(node->right, id, data);
-  }
-  else return node;
+        if (node == NULL) {
+                return (newnode(id, data));
+        }
+        if (id < node->id) {
+                node->left = insert(node->left, id, data);
+        }
+        else if (id > node->id) {
+                node->right = insert(node->right, id, data);
+        }
+        else return node;
 
-  node->height = 1 + max(height(node->left), height(node->right));
-  int balance = getbalance(node);
+        node->height = 1 + max(height(node->left), height(node->right));
+        int balance = getbalance(node);
 
-  //Left left rotate
-  if (balance > 1 && id < node->left->id){
-    return rightrotate(node);
-  }
-  //Right right rotate
-  if  (balance < -1 && id > node->right->id){
-    return leftrotate(node);
-  }
-  //left right rotate
-  if (balance > 1 && id > node->left->id){
-    node->left = leftrotate(node->left);
-    return rightrotate(node);
-  }
-  //Right left rotate
-  if (balance < -1 && id < node->right->id){
-    node->right = rightrotate(node->right);
-    return leftrotate(node);
-  }
-  return node;
+        //Left left rotate
+        if (balance > 1 && id < node->left->id) {
+                return rightrotate(node);
+        }
+        //Right right rotate
+        if  (balance < -1 && id > node->right->id) {
+                return leftrotate(node);
+        }
+        //left right rotate
+        if (balance > 1 && id > node->left->id) {
+                node->left = leftrotate(node->left);
+                return rightrotate(node);
+        }
+        //Right left rotate
+        if (balance < -1 && id < node->right->id) {
+                node->right = rightrotate(node->right);
+                return leftrotate(node);
+        }
+        return node;
 }
+
+int maxid(nodeavl root){
+        nodeavl p=root;
+        if (root != NULL) {
+                while(p->right != NULL) {
+                        p = p->right;
+                }
+                return p->id;
+        }
+        else{
+                return 0;
+        }
+}
+
+
 
 } /* Visitor */
 

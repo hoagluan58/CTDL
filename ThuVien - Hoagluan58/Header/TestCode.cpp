@@ -3,13 +3,16 @@
 
 
 int main(){
-        int numbook;
-        BookTitlePtr book = (BookTitlePtr) malloc(sizeof(BookTitle));
-        JsonToTitle(book, numbook);
-        ShowBookTitle(book, numbook);
-        for (int i=0 ; i<numbook; i++){
-          BookToJson(book[i].name, book[i].BookList);
-        }
+        Visitor::card vcard;
+        vcard.fname = "Hau";
+        vcard.lname = "Huynh";
+        vcard.gender = "Male";
+        vcard.status = 1;
+        Visitor::nodeavl root = Visitor::newnode(1, vcard);
+        std::cout << root->data.fname << '\n';
+        VisitorToJson(root);
+
+
 
 
 
