@@ -1,122 +1,37 @@
 [
-  {
-    "fname": "Hau",
-    "gender": "Male",
-    "id": 1,
-    "lname": "Huynh"
-  },
-  {
-    "fname": "Diep",
-    "gender": "Male",
-    "id": 2,
-    "lname": "Huynh"
-  },
-  {
-    "fname": "Hien",
-    "gender": "Female",
-    "id": 3,
-    "lname": "Phung"
-  },
-  {
-    "fname": "An",
-    "gender": "Female",
-    "id": 4,
-    "lname": "Vo"
-  },
-  {
-    "fname": "Quan",
-    "gender": "Male",
-    "id": 5,
-    "lname": "Duong"
-  },
-  {
-    "fname": "Quyen",
-    "gender": "Female",
-    "id": 6,
-    "lname": "Nguyen"
-  },
-  {
-    "fname": "Thuy",
-    "gender": "Female",
-    "id": 7,
-    "lname": "Nguyen"
-  },
-  {
-    "fname": "Vinh",
-    "gender": "Male",
-    "id": 8,
-    "lname": "Ninh"
-  },
-  {
-    "fname": "Diem",
-    "gender": "Female",
-    "id": 9,
-    "lname": "Ta"
-  },
-  {
-    "fname": "Cuc",
-    "gender": "Female",
-    "id": 10,
-    "lname": "Luong"
-  },
-  {
-    "fname": "Duong",
-    "gender": "Male",
-    "id": 11,
-    "lname": "Phi"
-  },
-  {
-    "fname": "Trang",
-    "gender": "Female",
-    "id": 12,
-    "lname": "Phung"
-  },
-  {
-    "fname": "Phuong",
-    "gender": "Female",
-    "id": 13,
-    "lname": "Huynh"
-  },
-  {
-    "fname": "Thanh",
-    "gender": "Female",
-    "id": 14,
-    "lname": "Ha"
-  },
-  {
-    "fname": "Thao",
-    "gender": "Female",
-    "id": 15,
-    "lname": "Thi"
-  },
-  {
-    "fname": "Phuc",
-    "gender": "Female",
-    "id": 16,
-    "lname": "Nhu"
-  },
-  {
-    "fname": "Tri",
-    "gender": "Male",
-    "id": 17,
-    "lname": "Manh"
-  },
-  {
-    "fname": "Huy",
-    "gender": "Male",
-    "id": 18,
-    "lname": "Cao"
-  },
-  {
-    "fname": "Truong",
-    "gender": "Male",
-    "id": 19,
-    "lname": "Phan"
-  },
-  {
-    "fname": "Y",
-    "gender": "Female",
-    "id": 20,
-    "lname": "Do"
-  }
+    {
+        "fname": "Hau",
+        "gender": "Male",
+        "id": 1,
+        "lname": "Huynh",
+        "status": 1
+    },
+    {
+        "fname": "Jao",
+        "gender": "Nam",
+        "id": 2,
+        "lname": "Long",
+        "status": 1
+    },
+    {
+        "fname": "King",
+        "gender": "Nam",
+        "id": 3,
+        "lname": "Don",
+        "status": 1
+    },
+    {
+        "fname": "Haw",
+        "gender": "Nam",
+        "id": 4,
+        "lname": "Lee",
+        "status": 1
+    },
+    {
+        "fname": "Posi",
+        "gender": "Nam",
+        "id": 5,
+        "lname": "Pozi",
+        "status": 1
+    }
 ]

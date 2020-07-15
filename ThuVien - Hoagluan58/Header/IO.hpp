@@ -1,323 +1,17 @@
 ﻿#ifndef IO_HPP
 #define IO_HPP
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <windows.h>
-#include <conio.h>
-#include "json.hpp"
-#include "Book.hpp"
-#include "Visitor.hpp"
+
 #include "Utils.hpp"
 
-using json = nlohmann::json;
-
-std::ostream& operator<<(std::ostream& os, const Borrow::abook& data){
-        os << "ID: " << data.id << "\n";
-        os << "Ngay muon: "
-           << data.datebor.day << "/" << data.datebor.month << "/" << data.datebor.year << "\n";
-        if (data.status == 1) {
-                os << "Return: "
-                   << data.dateret.day << "/" << data.dateret.month << "/" << data.dateret.year << "\n";
-        }
-        else if (data.status == 2) {
-                os << "Mat sach" << "\n";
-        }
-        else {
-                os << "Chua den han tra sach\n";
-        }
-
-        return os;
-}
-
-void ShowConsoleCursor(bool showFlag) {
-        HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
-        CONSOLE_CURSOR_INFO cursorInfo;
-        GetConsoleCursorInfo(out, &cursorInfo);
-        cursorInfo.bVisible = showFlag; // set the cursor visibility
-        SetConsoleCursorInfo(out, &cursorInfo);
-}
-
-void gotoxy(int x, int y) {
-        SHORT sx = SHORT(x), sy = SHORT(y);
-        static HANDLE h = NULL;
-        if(!h) h = GetStdHandle(STD_OUTPUT_HANDLE);
-        COORD c = { sx, sy };
-        SetConsoleCursorPosition(h,c);
-}
-
-int getEdge(int num, int charnum){
-        return ((num-charnum)/2);
-}
-
-void getWindowsSize(int &rows, int &columns){
-        CONSOLE_SCREEN_BUFFER_INFO csbi;
-        GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-        columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
-        rows = csbi.srWindow.Bottom - csbi.srWindow.Top +1;
-}
-
-void highLightChoose(std::string info, int y, int columns){
-        int x = getEdge(columns, info.length());
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 240);
-        gotoxy(x, y);
-        std::cout << info;
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-}
-
-void deHighLightChoose(std::string info, int y, int columns){
-        int x = getEdge(columns, info.length());
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        gotoxy(x, y);
-        std::cout << info;
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-}
-
-void printMenu(std::string Menu[], int n, int rows, int columns){
-        ShowConsoleCursor(false);
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        int first = getEdge(rows, n);
-        for(int i=0; i<n; i++) {
-                int temp = Menu[i].length();
-                temp = getEdge(columns, temp);
-                gotoxy(temp, first+i*2);
-                std::cout << Menu[i];
-        }
-}
-
-void Menu_Box (int rows, int columns,int speed=0, int showinfo=1){
-        system("CLS");
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        ShowConsoleCursor(false);
-        std::cout << " " << std::setfill('_') << std::setw(columns-1) << " \n";
-        // Sleep(speed);
-        for (int i=1; i<rows-2; i++) {
-                std::cout << "||" << std::setfill(' ') << std::setw(columns-2) << "||\n";
-                // Sleep(speed);
-        }
-        std::cout << "||" << std::setfill('_') << std::setw(columns-3) << "||";
-        if (showinfo == 1) {
-                gotoxy(getEdge(columns, 39), 2);
-                std::cout << "Hoc Vien Cong Nghe Buu Chinh Vien Thong";
-                gotoxy(getEdge(columns, 35), 3);
-                std::cout << "De Tai Cuoi Ky Mon Cau Truc Du Lieu";
-                gotoxy(getEdge(columns, 21), 4);
-                std::cout << "GV: Luu Nguyen Ky Thu";
-                gotoxy(getEdge(columns, 28), 7);
-                std::cout << "CHUONG TRINH QUAN LI THU VIEN";
-                gotoxy(0, 4);
-                std::cout << "||" << std::setfill('_') << std::setw(columns-3) << "||";
-        }
-}
-
-void getInput(int &pointer, int maxpointer, int x, int y, size_t max, std::string &input){
-        int rows, columns, start = input.length() > 49 ? input.length()-49 : 0;
-        getWindowsSize(rows, columns);
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        ShowConsoleCursor(true);
-
-        std::string clear(50, ' ');
-        unsigned char capture;
-        size_t pos = input.length();
-
-        gotoxy(x, y);
-        std::cout << input.substr(start);
-
-        while (true) {
-                if (kbhit()) {
-                        if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
-                                pointer++;
-                                Sleep(125);
-                                return;
-                        }
-                        else if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
-                                pointer = -1;
-                                return;
-                        }
-                        else if (GetAsyncKeyState(VK_BACK) & 0x8000) {
-                                std::string cclear(input.length(), ' ');
-                                gotoxy(x, y);
-                                std::cout << cclear;
-                                if (input == "") {
-                                        continue;
-                                }
-                                else {
-                                        input.pop_back();
-                                        gotoxy(x, y);
-                                        std::cout << input.substr(start);
-                                        pos--;
-                                        gotoxy(x+pos, y);
-                                        if (start > 0) {
-                                                start--;
-                                                gotoxy(x+48, y);
-                                        }
-                                        Sleep(125);
-                                        continue;
-                                }
-                        }
-                        else if (GetAsyncKeyState(VK_UP) & 0x8000) {
-                                if (pointer > 0) {
-                                        pointer--;
-                                        return;
-                                }
-                        }
-                        else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
-                                if (pointer < maxpointer) {
-                                        pointer++;
-                                        return;
-                                }
-                        }
-                        else if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
-                                if (pos > 0) {
-                                        pos--;
-                                        gotoxy(x+pos, y);
-                                        if (start > 0) {
-                                                start--;
-                                                gotoxy(x+49, y);
-                                        }
-
-                                }
-                                Sleep(125);
-                                continue;
-                        }
-                        else if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
-                                if (pos < input.length()) {
-                                        pos++;
-                                        gotoxy(x+pos, y);
-                                        if (pos > 49) {
-                                                start++;
-                                                gotoxy(x+49, y);
-                                        }
-                                }
-                                Sleep(125);
-                                continue;
-                        }
-                        else {
-                                capture = getch();
-                                while(kbhit()) getch();
-                                if (input.length() == max) {
-                                        continue;
-                                }
-                                else {
-                                        if (isalnum(capture)) {
-                                                input.insert(pos, 1, capture);
-                                                pos++;
-                                                gotoxy(x,y);
-                                                if (pos > 49) {
-                                                        start++;
-                                                }
-                                                std::cout << input.substr(start);
-                                                gotoxy(x+pos, y);
-                                                if (pos > 49) {
-                                                        gotoxy(x+49, y);
-                                                }
-                                                continue;
-                                        }
-                                }
-                        }
-                }
-        }
-}
-
-void getNumInput(int &pointer, int maxpointer, int x, int y, size_t max, int &data){
-        std::string input = std::to_string(data);
-        int rows, columns;
-        getWindowsSize(rows, columns);
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        ShowConsoleCursor(true);
-
-        std::string clear(max, ' ');
-        unsigned char capture;
-        size_t pos=input.length();
-
-        gotoxy(x, y);
-        std::cout << input;
-
-        while (true) {
-                if (kbhit()) {
-                        if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
-                                pointer++;
-                                Sleep(125);
-                                data = stoi(input);
-                                return;
-                        }
-                        else if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
-                                pointer = -1;
-                                data = stoi(input);
-                                return;
-                        }
-                        else if (GetAsyncKeyState(VK_BACK) & 0x8000) {
-                                if (pos-1 < 0) {
-                                        continue;
-                                }
-                                input.erase(pos-1,1);
-                                pos--;
-                                gotoxy(x, y);
-                                std::cout << clear;
-                                gotoxy(x, y);
-                                std::cout << input;
-                                gotoxy(x+pos, y);
-                                Sleep(125);
-                                continue;
-                        }
-                        else if (GetAsyncKeyState(VK_UP) & 0x8000) {
-                                if (pointer > 0) {
-                                        pointer--;
-                                        data = stoi(input);
-                                        return;
-                                }
-                        }
-                        else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
-                                if (pointer < maxpointer) {
-                                        pointer++;
-                                        data = stoi(input);
-                                        return;
-                                }
-                        }
-                        else if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
-                                if (pos > 0) {
-                                        pos--;
-                                        gotoxy(x+pos, y);
-                                }
-                                continue;
-                        }
-                        else if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
-                                if (pos < input.length()) {
-                                        pos++;
-                                        gotoxy(x+pos, y);
-                                }
-                                continue;
-                        }
-                        else {
-                                capture = getch();
-                                while(kbhit()) getch();
-                                if (input.length() == max) {
-                                        continue;
-                                }
-                                else {
-
-                                        if (isdigit(capture)) {
-                                                input.insert(pos, 1, capture);
-                                                pos++;
-                                                gotoxy(x,y);
-                                                std::cout << input;
-                                                gotoxy(x+pos, y);
-                                                continue;
-                                        }
-                                }
-                        }
-                }
-        }
-}
-
 int Menu_Add_Card (){
-        const int menu_count = 5;
-        int ID_Check=0, Name_check=0, Gender_check=0, Pass_check=0;
-        int pointer=1, prepointer=1, rows, columns, first;
-
+        int menu_count = 5, Name_check=0, Gender_check=0, ID=0;
+        int pointer=0, prepointer=0, rows, columns, first;
         getWindowsSize(rows, columns);
+        Visitor::nodeavl root = JsonToVisitor();
+        ID = maxid(root) + 1;
+        Visitor::card vcard;
+        vcard.status = 1;
 
-        Visitor::card newCard;
         std::string Menu[menu_count] = {"Ma the       :                                                    |",
                                         "Ho va ten    :                                                    |",
                                         "Gioi tinh    :                                                    |",
@@ -326,31 +20,25 @@ int Menu_Add_Card (){
         std::string name_temp;
 
         getWindowsSize(rows, columns);
-
-        //tinh khoang trong 2 ben
         int edge = getEdge(columns, 67);
-
-        //tinh vi tri in dau tien
-        first = getEdge(rows, menu_count);
+        first = getEdge(rows, 6);
         Menu_Box(rows, columns, 0);
-        printMenu(Menu, menu_count, rows, columns);
+        printMenu(Menu, 6, rows, columns);
+
         gotoxy(edge+67, first+2);
         std::cout << "XX";
         gotoxy(edge+67, first+4);
         std::cout << "XX";
 
-
         while (true) {
-
                 int oldChoosePos = first+prepointer*2;
                 int newChoosePos = first+pointer*2;
                 deHighLightChoose(Menu[prepointer], oldChoosePos, columns);
                 highLightChoose(Menu[pointer], newChoosePos, columns);
                 gotoxy(edge+15, first);
+                std::cout << ID;
                 gotoxy(edge+15, first+2);
                 std::cout << name_temp;
-                gotoxy(edge+15, first+4);
-                gotoxy(edge+15, first+6);
 
                 while (true) {
                         if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
@@ -360,11 +48,18 @@ int Menu_Add_Card (){
                         if (pointer == -1) {
                                 return 0;
                         }
+                        else if (pointer == 0) {
+                                prepointer = 0;
+                                if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+                                        pointer++;
+                                        break;
+                                }
+                        }
                         else if (pointer == 1) {
                                 prepointer = 1;
                                 getInput(pointer, 5, edge+15, first+2, 50, name_temp);
-
-                                if (1) {
+                                tofNamelName(vcard.fname, vcard.lname, name_temp);
+                                if (vcard.fname != "" && vcard.lname != "") {
                                         Name_check = 1;
                                         gotoxy(edge+67, first+2);
                                         std::cout << "OK";
@@ -378,7 +73,9 @@ int Menu_Add_Card (){
                         }
                         else if (pointer == 2) {
                                 prepointer = 2;
-                                if (1) {
+                                getInput(pointer, 5, edge+15, first+4, 50, vcard.gender);
+                                if (strtolower(vcard.gender) == "nam"
+                                    || strtolower(vcard.gender) == "nu") {
                                         Gender_check = 1;
                                         gotoxy(edge+67, first+4);
                                         std::cout << "OK";
@@ -392,21 +89,6 @@ int Menu_Add_Card (){
                         }
                         else if (pointer == 3) {
                                 prepointer = 3;
-                                if (1) {
-                                        Pass_check = 1;
-                                        gotoxy(edge+67, first+6);
-                                        std::cout << "OK";
-                                }
-                                else {
-                                        gotoxy(edge+67, first+6);
-                                        Pass_check = 0;
-                                        std::cout << "XX";
-                                }
-                                break;
-
-                        }
-                        else if (pointer == 4) {
-                                prepointer = 4;
                                 if (GetAsyncKeyState(VK_UP) & 0x8000) {
                                         pointer--;
                                         break;
@@ -416,11 +98,13 @@ int Menu_Add_Card (){
                                         break;
                                 }
                                 else if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
-                                        if (ID_Check && Name_check && Gender_check && Pass_check) {
+                                        if (Name_check && Gender_check) {
+                                                insert(root, ID, vcard);
+                                                VisitorToJson(root);
                                                 int return_pointer = 0;
                                                 Menu_Box(rows, columns, 0, 0);
                                                 gotoxy(columns/2-12, rows/2);
-                                                std::cout << "Tiep tuc them sinh vien?";
+                                                std::cout << "Tiep tuc tao the moi?";
                                                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
                                                 gotoxy(columns/2-4, rows/2+1);
                                                 std::cout << "Tiep tuc";
@@ -467,9 +151,10 @@ int Menu_Add_Card (){
                                         }
                                         break;
                                 }
+
                         }
-                        else if (pointer == 5) {
-                                prepointer = 5;
+                        else if (pointer == 4) {
+                                prepointer = 4;
                                 if (GetAsyncKeyState(VK_UP) & 0x8000) {
                                         pointer--;
                                         break;
@@ -479,7 +164,6 @@ int Menu_Add_Card (){
                                         return 0;
                                 }
                         }
-
                 }
                 Sleep(125);
         }
@@ -779,7 +463,7 @@ void Menu (){
         }
 }
 
-void ShowBookList (ListOfBookPtr book){
+void ShowBookList (Book::ListPtr book){
         while (book->next != NULL) {
                 std::cout << "ID: " << book->data.id << ", ";
                 std::cout << "Status: " << book->data.status << ", ";
@@ -788,111 +472,7 @@ void ShowBookList (ListOfBookPtr book){
         }
 }
 
-void BookToJson (std::string filename, ListOfBookPtr list){
-        json data;
-        while(list->next != NULL) {
-                data += {
-                        {"id", list->data.id},
-                        {"status", list->data.status},
-                        {"position", list->data.position}
-                };
-
-                list = list->next;
-        }
-        if (data != NULL) {
-                std::ofstream output("Data/Book/" + filename + ".json");
-                output << std::setw(4) << data << std::endl;
-        }
-}
-
-void JsonToBook (std::string filename, ListOfBookPtr &list){
-        json data;
-        std::ifstream input(filename + ".json");
-        input >> data;
-
-        for (size_t i = 0; i < data.size(); i++) {
-                Book temp;
-                data[i].at("id").get_to(temp.id);
-                data[i].at("position").get_to(temp.position);
-                data[i].at("status").get_to(temp.status);
-                InsertBookToList(&list, temp);
-        }
-}
-
-void TitleToJson (BookTitlePtr list){
-        json data;
-        for (size_t i = 0; i < sizeof(list); i++) {
-                data += {
-                        {"isbn", list[i].isbn},
-                        {"name", list[i].name},
-                        {"author", list[i].author},
-                        {"pages", list[i].pages},
-                        {"years", list[i].pages},
-                        {"genre", list[i].genre}
-                };
-        }
-        std::ofstream output("BookTitle.json");
-        if (output.is_open()) {
-                output << std::setw(4) << data << std::endl;
-                output.close();
-        }
-}
-
-void JsonToTitle (BookTitlePtr &out, int &count){
-        json data;
-        std::ifstream infile("Data/BookTitle.json", std::ios::in);
-        if (infile.is_open()) {
-                infile >> data;
-                infile.close();
-                out = new BookTitle[data.size()];
-                count = data.size();
-                for (int i=0; i < count; i++) {
-                        data[i].at("isbn").get_to(out[i].isbn);
-                        data[i].at("name").get_to(out[i].name);
-                        data[i].at("author").get_to(out[i].author);
-                        data[i].at("pages").get_to(out[i].pages);
-                        data[i].at("years").get_to(out[i].years);
-                        data[i].at("genre").get_to(out[i].genre);
-                        std::ifstream bookdata(out[i].name + ".json", std::ios::in);
-                        if (bookdata.is_open()) {
-                                json book;
-                                bookdata >> book;
-                                JsonToBook(out[i].name, out[i].BookList);
-                                bookdata.close();
-                        }
-                        else {
-                                std::cerr << "Unable to open file\n";
-                        }
-                }
-        }
-        else {
-                std::cerr << "Unable to open file\n";
-        }
-}
-
-void vjson (Visitor::nodeavl root, json &data){
-        if (root!= NULL) {
-                vjson(root->left, data);
-                Visitor::card card = root->data;
-                data += {
-                        {"id", root->id},
-                        {"fname", card.fname},
-                        {"lname", card.lname},
-                        {"gender", card.gender},
-                };
-                vjson(root->right, data);
-        }
-}
-
-void VisitorToJson (Visitor::nodeavl root){
-        json data;
-        vjson(root, data);
-        std::ofstream out("Data/Visitor.json");
-        out << std::setw(4) << data;
-        out.close();
-}
-
-void ShowBookTitle (BookTitlePtr data, int n){
+void ShowBookTitle (Book::TitlePtr data, int n){
         for (int i = 0; i < n; i++) {
                 std::cout << "ISBN: " << data[i].isbn << '\n';
                 std::cout << "Name: " << data[i].name << '\n';
@@ -905,6 +485,8 @@ void ShowBookTitle (BookTitlePtr data, int n){
                 std::cout << "_________________________________________" << '\n';
         }
 }
+
+
 
 //Nhập xuất độc giả
 void InsertVisitor(Visitor::card &x) {
@@ -951,7 +533,7 @@ void PrintVisitor(Visitor::card x) {
     std::getline(std::cin, x.genre);
    }
  */
-void PrintBookTitle(BookTitle x) {
+void PrintBookTitle(Book::Title x) {
         std::cout << "\n Ma ISBN: " << x.isbn;
         std::cout << "\n Ten sach: " << x.name;
         std::cout << "\n Tac gia: " << x.author;
