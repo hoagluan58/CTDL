@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<FileVersion major="1" minor="0" />
+	<ActiveTarget name="Debug" />
+	<File name="Utils.hpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="29321" topLine="77" />
+		</Cursor>
+		<Folding>
+			<Collapse line="15" />
+			<Collapse line="29" />
+			<Collapse line="50" />
+			<Collapse line="51" />
+			<Collapse line="58" />
+			<Collapse line="66" />
+			<Collapse line="74" />
+			<Collapse line="78" />
+			<Collapse line="85" />
+			<Collapse line="94" />
+			<Collapse line="103" />
+			<Collapse line="107" />
+			<Collapse line="115" />
+			<Collapse line="224" />
+			<Collapse line="238" />
+			<Collapse line="317" />
+			<Collapse line="335" />
+			<Collapse line="342" />
+			<Collapse line="358" />
+			<Collapse line="372" />
+			<Collapse line="392" />
+			<Collapse line="411" />
+			<Collapse line="426" />
+			<Collapse line="455" />
+			<Collapse line="472" />
+			<Collapse line="480" />
+			<Collapse line="507" />
+			<Collapse line="519" />
+			<Collapse line="539" />
+			<Collapse line="548" />
+			<Collapse line="593" />
+			<Collapse line="602" />
+			<Collapse line="615" />
+			<Collapse line="640" />
+			<Collapse line="653" />
+			<Collapse line="674" />
+			<Collapse line="689" />
+			<Collapse line="699" />
+			<Collapse line="710" />
+			<Collapse line="724" />
+			<Collapse line="773" />
+		</Folding>
+	</File>
+	<File name="Struct.hpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2034" topLine="129" />
+		</Cursor>
+		<Folding>
+			<Collapse line="9" />
+			<Collapse line="216" />
+			<Collapse line="226" />
+			<Collapse line="236" />
+			<Collapse line="243" />
+			<Collapse line="248" />
+			<Collapse line="258" />
+			<Collapse line="270" />
+			<Collapse line="282" />
+			<Collapse line="317" />
+			<Collapse line="325" />
+			<Collapse line="383" />
+			<Collapse line="398" />
+			<Collapse line="414" />
+		</Folding>
+	</File>
+	<File name="json.hpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="197658" topLine="5150" />
+		</Cursor>
+	</File>
+	<File name="IO.hpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="59206" topLine="1056" />
+		</Cursor>
+	</File>
+	<File name="DD.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="192" topLine="0" />
+		</Cursor>
+	</File>
+</CodeBlocks_layout_file>

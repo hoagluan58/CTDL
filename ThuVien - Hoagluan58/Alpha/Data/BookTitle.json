@@ -1,0 +1,299 @@
+[
+    {
+        "author": "Edna Wu",
+        "borrow": 0,
+        "genre": "Crime",
+        "isbn": "978-1-2543-1934-6",
+        "name": "Cursed Sign",
+        "pages": 200,
+        "years": 200
+    },
+    {
+        "author": "Jolene Carter",
+        "borrow": 0,
+        "genre": "Crime",
+        "isbn": "978-5-8890-0197-3",
+        "name": "Son of Glass",
+        "pages": 100,
+        "years": 100
+    },
+    {
+        "author": "Rhiana Fisher",
+        "borrow": 0,
+        "genre": "Crime",
+        "isbn": "978-1-2412-8644-6",
+        "name": "The Ghost in the Night",
+        "pages": 200,
+        "years": 200
+    },
+    {
+        "author": "Charleigh Alvarez",
+        "borrow": 0,
+        "genre": "Crime",
+        "isbn": "978-9-6470-9048-3",
+        "name": "Unleash the Devil",
+        "pages": 150,
+        "years": 150
+    },
+    {
+        "author": "Nida Anthony",
+        "borrow": 0,
+        "genre": "Crime",
+        "isbn": "978-9-5261-7454-9",
+        "name": "Made for Ruin",
+        "pages": 150,
+        "years": 150
+    },
+    {
+        "author": "Kingston Allman",
+        "borrow": 0,
+        "genre": "Crime",
+        "isbn": "978-2-0677-0378-0",
+        "name": "Wanted for Slaughter",
+        "pages": 155,
+        "years": 155
+    },
+    {
+        "author": "Ruby-Mae Glass",
+        "borrow": 0,
+        "genre": "Crime",
+        "isbn": "978-7-1511-2641-4",
+        "name": "The Murder in the City",
+        "pages": 200,
+        "years": 200
+    },
+    {
+        "author": "Maryam Whitworth",
+        "borrow": 0,
+        "genre": "Fantasy",
+        "isbn": "978-7-4889-8448-0",
+        "name": "The Colossus in the Storm",
+        "pages": 205,
+        "years": 205
+    },
+    {
+        "author": "Imani Flowers",
+        "borrow": 0,
+        "genre": "Fantasy",
+        "isbn": "978-1-2512-2933-4",
+        "name": "The Weeping Heavens",
+        "pages": 210,
+        "years": 210
+    },
+    {
+        "author": "Kezia Sellers",
+        "borrow": 0,
+        "genre": "Fantasy",
+        "isbn": "978-7-8395-7703-3",
+        "name": "Rogue's Oath",
+        "pages": 215,
+        "years": 215
+    },
+    {
+        "author": "Jimmie Campbell",
+        "borrow": 0,
+        "genre": "Fantasy",
+        "isbn": "978-0-3468-5036-1",
+        "name": "The Salt of the Nameless",
+        "pages": 220,
+        "years": 220
+    },
+    {
+        "author": "Aronas Franco",
+        "borrow": 0,
+        "genre": "Fantasy",
+        "isbn": "978-1-2141-4362-2",
+        "name": "Scars of Circe",
+        "pages": 230,
+        "years": 230
+    },
+    {
+        "author": "Maariya Neal",
+        "borrow": 0,
+        "genre": "Fantasy",
+        "isbn": "978-5-5695-0409-1",
+        "name": "Daughter of Light",
+        "pages": 240,
+        "years": 240
+    },
+    {
+        "author": "Sahib Higgs",
+        "borrow": 0,
+        "genre": "Mystery",
+        "isbn": "978-8-4444-8970-4",
+        "name": "Secret of the Pock-Marked Baker",
+        "pages": 100,
+        "years": 100
+    },
+    {
+        "author": "Brad Rutledge",
+        "borrow": 0,
+        "genre": "Mystery",
+        "isbn": "978-3-4492-2393-3",
+        "name": "Sign of the Concave Pendant",
+        "pages": 105,
+        "years": 105
+    },
+    {
+        "author": "Kaylee Terry",
+        "borrow": 0,
+        "genre": "Mystery",
+        "isbn": "978-6-1125-5719-9",
+        "name": "The Gold Mirror",
+        "pages": 110,
+        "years": 110
+    },
+    {
+        "author": "Stella Riggs",
+        "borrow": 0,
+        "genre": "Mystery",
+        "isbn": "978-3-2182-4844-0",
+        "name": "The Solitary Trolley",
+        "pages": 120,
+        "years": 120
+    },
+    {
+        "author": "Marek Gillespie",
+        "borrow": 0,
+        "genre": "Mystery",
+        "isbn": "978-1-2079-4032-0",
+        "name": "Death of the Prize Corgi",
+        "pages": 80,
+        "years": 80
+    },
+    {
+        "author": "Nafeesa Mcdaniel",
+        "borrow": 0,
+        "genre": "Mystery",
+        "isbn": "978-9-0057-3429-5",
+        "name": "Clue of the Split Claw",
+        "pages": 90,
+        "years": 90
+    },
+    {
+        "author": "Aadil Leblanc",
+        "borrow": 0,
+        "genre": "Mystery",
+        "isbn": "978-6-1270-3037-3",
+        "name": "Case of the Chinese Boa",
+        "pages": 50,
+        "years": 50
+    },
+    {
+        "author": "Toni Norton",
+        "borrow": 0,
+        "genre": "Mystery",
+        "isbn": "978-8-2292-8196-7",
+        "name": "Sign of the Hollow Amulet",
+        "pages": 100,
+        "years": 100
+    },
+    {
+        "author": "Fergus Chadwick",
+        "borrow": 0,
+        "genre": "Romance",
+        "isbn": "978-8-1352-6698-0",
+        "name": "Bullet in the Heart",
+        "pages": 160,
+        "years": 160
+    },
+    {
+        "author": "Farzana Cleveland",
+        "borrow": 0,
+        "genre": "Romance",
+        "isbn": "978-6-3520-0302-9",
+        "name": "Flirty and Thirty",
+        "pages": 169,
+        "years": 169
+    },
+    {
+        "author": "Abigale Burch",
+        "borrow": 0,
+        "genre": "Romance",
+        "isbn": "978-0-0436-2088-5",
+        "name": "American Born",
+        "pages": 164,
+        "years": 164
+    },
+    {
+        "author": "Timothy Weaver",
+        "borrow": 0,
+        "genre": "Romance",
+        "isbn": "978-6-2842-6157-3",
+        "name": "Dearest, You Said",
+        "pages": 184,
+        "years": 184
+    },
+    {
+        "author": "Karam Lara",
+        "borrow": 0,
+        "genre": "Romance",
+        "isbn": "978-3-0816-4281-9",
+        "name": "Birds of a Feather",
+        "pages": 184,
+        "years": 184
+    },
+    {
+        "author": "Hira Kaye",
+        "borrow": 0,
+        "genre": "Romance",
+        "isbn": "978-3-1205-6247-4",
+        "name": "Trials of Fire",
+        "pages": 184,
+        "years": 184
+    },
+    {
+        "author": "Cory Greer",
+        "borrow": 0,
+        "genre": "Romance",
+        "isbn": "978-4-0593-0015-1",
+        "name": "The Accidental Wedding",
+        "pages": 185,
+        "years": 185
+    },
+    {
+        "author": "Ailsa Montgomery",
+        "borrow": 0,
+        "genre": "Romance",
+        "isbn": "978-8-6351-7328-3",
+        "name": "Two's Company",
+        "pages": 186,
+        "years": 186
+    },
+    {
+        "author": "Lenny Torres",
+        "borrow": 0,
+        "genre": "Sci-fi",
+        "isbn": "978-6-7961-9412-3",
+        "name": "The Code of Hope",
+        "pages": 400,
+        "years": 400
+    },
+    {
+        "author": "Mandeep Kelley",
+        "borrow": 0,
+        "genre": "Sci-fi",
+        "isbn": "978-0-9725-8691-7",
+        "name": "Pluto Ascending",
+        "pages": 500,
+        "years": 500
+    },
+    {
+        "author": "Madison Eaton",
+        "borrow": 0,
+        "genre": "Sci-fi",
+        "isbn": "978-8-3832-4023-7",
+        "name": "2077 Cyberpunk",
+        "pages": 600,
+        "years": 600
+    },
+    {
+        "author": "Lauryn Hulme",
+        "borrow": 0,
+        "genre": "Sci-fi",
+        "isbn": "978-3-0558-5213-8",
+        "name": "Saturn Falling",
+        "pages": 700,
+        "years": 700
+    }
+]
